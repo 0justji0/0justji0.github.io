@@ -1,12 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation</title>
+    <style>
+        nav {
+            background-color: black;
+            overflow: hidden;
+        }
+        /* 내비게이션 상단 메뉴 스타일 */
+        nav a {
+            float: left; /* 왼쪽으로 정렬 */
+            display: block; /* 블록 요소로 표시 */
+            color: aliceblue; /* 글자색 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            padding: 14px 20px; /* 위 아래 14, 좌우 20 간격 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+        /* hover라는 것은 마우스를 버튼 위에 올렸을 때 색이 변하게 되는 것 */
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        #mapContent {
+            display: none; /* 초기에 숨기기 */
+        }
+        #maputnikContent {
+            display: none; /* 초기에 숨기기 */
+        }
+        #mapboxlayerContent {
+            display: none; /* 초기에 숨기기 */
+        }
+        #mapboxguideContent {
+            display: none; /* 초기에 숨기기 */
+        }
+        #whoContent {
+            display: none; /* 초기에 숨기기 */
+        }
+        .content {
+            display: none; /* content가 있는 모든 요소들을 초기에 숨기기 */
+        }
+    </style>
 </head>
 <body>
-  <p>Hello, World!</p>
+    <nav> <!--<a href="요소" onclick="toggleContent(요소이름)">링크를 걸 단어</a>-->
+        <a href="#map" onclick="toggleContent('mapContent')">map</a>
+        <a href="#maputnik" onclick="toggleContent('maputnikContent')">maputnik</a>
+        <a href="#mapboxlayer" onclick="toggleContent('mapboxlayerContent')">mapboxlayer</a>
+        <a href="#mapboxguide" onclick="toggleContent('mapboxguideContent')">mapboxguide</a>
+        <a href="#who" onclick="toggleContent('whoContent')">who</a>
+    </nav>
+    <div style="padding: 20px;"> <!--좌우 간격 20-->
+        <div id="mapContent" class="content">
+            <h2>map</h2><!--소제목-->
+            <!--링크 걸기 target="_blank"는 새탭으로 이동이란 뜻-->
+            <p><a href="https://www.google.com/maps/?hl=ko" target="_blank">구글지도</a></p>
+            <p><a href="https://map.naver.com/p?c=15.00,0,0,0,dh" target="_blank">네이버지도</a></p>
+            <p><a href="https://map.kakao.com/" target="_blank">다음지도</a></p>
+        </div>
+
+        <div id="maputnikContent" class="content">
+            <p><a href="https://maplibre.org/maputnik/?layer=4028937392%7E0#7.34/36.822/128.282" target="_blank">maputnik</a></p>
+        </div>
+
+        <div id="mapboxlayerContent" class="content">
+            <p><a href="https://docs.google.com/spreadsheets/d/1IOQVoOXsDFsLw9nJQo1iHPj-pmuqDUjPpCWbNzYfLGo/edit#gid=479886534" target="_blank">mapboxlayer</a></p>
+        </div>
+
+        <div id="mapboxguideContent" class="content">
+            <p><a href="https://www.notion.so/dd7362ff0ec74327b2c69f851e2404ac?v=a8a01dc8f3954a1d9b7fdd38c3ef0074" target="_blank">mapboxguide</a></p>
+        </div>
+
+        <div id="whoContent" class="content">
+            <p><a href="http://127.0.0.1:5500/MJ_Portfolio.html" target="_blank">who</a></p>
+        </div>
+    </div>
+
+    <script>
+        function hideAllContent() {
+        var contents = document.querySelectorAll('.content'); // 모든 내용을 가져옴
+        for (var i = 0; i < contents.length; i++) {
+            contents[i].style.display = 'none'; // 모든 내용 숨김
+        }
+    }
+
+    // 내용을 토글하는 함수
+    function toggleContent(contentId) {
+        hideAllContent(); // 이전에 보여진 내용을 숨김
+        var content = document.getElementById(contentId); // contentId에 해당하는 요소를 가져옴
+        content.style.display = 'block'; // 선택한 내용 보이기
+    }
+    </script>
 </body>
 </html>
