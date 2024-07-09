@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+        }
+        #gameArea {
+            position: relative;
+            height: 90vh;
+            border: 1px solid #000;
+            margin: 20px;
+        }
+        .falling-word {
+            position: absolute;
+            top: 0;
+            font-size: 24px;
+            color: red;
+        }
+        #inputArea {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #wordInput {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+        }
+        #gameOverMessage {
+            display: none;
+            font-size: 24px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Typing Game</h1>
+    <div id="gameArea"></div>
+    <div id="inputArea">
+        <input type="text" id="wordInput" placeholder="여기에 영어를 입력해서 지워주세요">
+    </div>
+    <div id="gameOverMessage">Game Over!</div>
+    <script src="game.js"></script>
+</body>
+</html>
