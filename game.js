@@ -4,6 +4,8 @@ const gameOverMessage = document.getElementById('gameOverMessage');
 const words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew'];
 let fallingWords = [];
 let gameInterval;
+const wordHeight = 30; // 단어의 대략적인 높이
+const wordWidth = 100; // 단어의 대략적인 너비
 
 function startGame() {
     gameInterval = setInterval(() => {
@@ -21,20 +23,24 @@ function createWord() {
     let leftPosition;
     let attempts = 0;
     do {
-        leftPosition = Math.random() * (gameArea.clientWidth - 100);
+        leftPosition = Math.random() * (gameArea.clientWidth - wordWidth);
         attempts++;
-    } while (isOverlapping(leftPosition) && attempts < 100);
+    } while (isOverlapping(leftPosition, 0) && attempts < 100);
 
     wordElement.style.left = leftPosition + 'px';
+    wordElement.style.top = '0px';
     gameArea.appendChild(wordElement);
     fallingWords.push(wordElement);
 }
 
-function isOverlapping(leftPosition) {
-    const wordWidth = 100; // 단어의 대략적인 너비
+function isOverlapping(leftPosition, topPosition) {
     for (let word of fallingWords) {
         const wordLeft = parseInt(word.style.left);
-        if (leftPosition < wordLeft + wordWidth && leftPosition + wordWidth > wordLeft) {
+        const wordTop = parseInt(word.style.top) || 0;
+        if (leftPosition < wordLeft + wordWidth &&
+            leftPosition + wordWidth > wordLeft &&
+            topPosition < wordTop + wordHeight &&
+            topPosition + wordHeight > wordTop) {
             return true;
         }
     }
@@ -43,8 +49,9 @@ function isOverlapping(leftPosition) {
 
 function moveWords() {
     fallingWords.forEach(word => {
-        word.style.top = (parseInt(word.style.top) || 0) + 5 + 'px';
-        if (parseInt(word.style.top) > gameArea.clientHeight) {
+        const newTop = (parseInt(word.style.top) || 0) + 5;
+        word.style.top = newTop + 'px';
+        if (newTop + wordHeight >= gameArea.clientHeight) {
             gameOver();
         }
     });
@@ -52,8 +59,8 @@ function moveWords() {
 
 function gameOver() {
     clearInterval(gameInterval);
-    wordInput.disabled = true; // 입력창 비활성화
-    gameOverMessage.style.display = 'block'; // 게임 오버 메시지 표시
+    wordInput.disabled = true;
+    gameOverMessage.style.display = 'block';
 }
 
 wordInput.addEventListener('keydown', (event) => {

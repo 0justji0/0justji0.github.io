@@ -13,9 +13,10 @@
         }
         #gameArea {
             position: relative;
-            height: 90vh;
+            height: 80vh; /* 게임 영역의 높이를 줄임 */
             border: 1px solid #000;
             margin: 20px;
+            overflow: auto; /* 테두리 밖으로 나가지 않게 하기 위해 overflow hidden */
         }
         .falling-word {
             position: absolute;
@@ -29,6 +30,7 @@
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
+            height: 10vh; /* 입력 영역의 높이 지정 */
         }
         #wordInput {
             width: 100%;
