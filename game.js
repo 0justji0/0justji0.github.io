@@ -17,9 +17,28 @@ function createWord() {
     const wordElement = document.createElement('div');
     wordElement.className = 'falling-word';
     wordElement.innerText = randomWord;
-    wordElement.style.left = Math.random() * (gameArea.clientWidth - 100) + 'px';
+
+    let leftPosition;
+    let attempts = 0;
+    do {
+        leftPosition = Math.random() * (gameArea.clientWidth - 100);
+        attempts++;
+    } while (isOverlapping(leftPosition) && attempts < 100);
+
+    wordElement.style.left = leftPosition + 'px';
     gameArea.appendChild(wordElement);
     fallingWords.push(wordElement);
+}
+
+function isOverlapping(leftPosition) {
+    const wordWidth = 100; // 단어의 대략적인 너비
+    for (let word of fallingWords) {
+        const wordLeft = parseInt(word.style.left);
+        if (leftPosition < wordLeft + wordWidth && leftPosition + wordWidth > wordLeft) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function moveWords() {
