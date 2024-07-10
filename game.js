@@ -49,7 +49,7 @@ function isOverlapping(leftPosition, topPosition) {
 
 function moveWords() {
     fallingWords.forEach(word => {
-        const newTop = (parseInt(word.style.top) || 0) + 5;
+        const newTop = (parseInt(word.style.top) || 0) + 10; // 속도 조절
         word.style.top = newTop + 'px';
         if (newTop + wordHeight >= gameArea.clientHeight) {
             gameOver();

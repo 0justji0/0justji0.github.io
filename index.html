@@ -16,7 +16,7 @@
             height: 80vh; /* 게임 영역의 높이를 줄임 */
             border: 1px solid #000;
             margin: 20px;
-            overflow: auto; /* 테두리 밖으로 나가지 않게 하기 위해 overflow hidden */
+            overflow: auto;
         }
         .falling-word {
             position: absolute;
@@ -41,7 +41,8 @@
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             background-color: rgba(0, 0, 0, 0.8);
             color: white;
