@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const words = ['javascript', 'hangman', 'coding', 'developer', 'computer'];
+    const words = [
+        {word: 'javascript', hint: 'A popular programming language.'},
+        {word: 'hangman', hint: 'A classic word guessing game.'},
+        {word: 'coding', hint: 'Writing instructions for computers.'},
+        {word: 'developer', hint: 'A person who creates software.'},
+        {word: 'computer', hint: 'An electronic device for storing and processing data.'}
+    ];
     let selectedWord = '';
+    let selectedHint = '';
     let guessedLetters = [];
     let mistakes = 0;
     const maxMistakes = 6;
@@ -12,7 +19,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const gameOverMessage = document.getElementById('gameOverMessage');
 
     function startHangmanGame() {
-        selectedWord = words[Math.floor(Math.random() * words.length)];
+        const randomIndex = Math.floor(Math.random() * words.length);
+        selectedWord = words[randomIndex].word;
+        selectedHint = words[randomIndex].hint;
         guessedLetters = [];
         mistakes = 0;
         hangmanArea.innerHTML = '';
@@ -20,6 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         hangmanInputArea.style.display = 'block';
         hangmanInput.value = '';
         hangmanInput.focus();
+        gameOverMessage.style.display = 'none'; // 팝업 메시지 숨기기
     }
 
     function updateHangmanDisplay() {
@@ -33,6 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         }
         hangmanArea.innerHTML = `<p>${wordDisplay}</p>`;
+        hangmanArea.innerHTML += `<p>Hint: ${selectedHint}</p>`;
         hangmanArea.innerHTML += `<p>Mistakes: ${mistakes}/${maxMistakes}</p>`;
         drawHangman();
     }
@@ -93,7 +104,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 |     |
                 ●     |
                -|-    |
-               / \    |
+               / \\    |
             `
         ];
         hangmanArea.innerHTML += `<pre>${hangmanStages[mistakes]}</pre>`;
@@ -108,6 +119,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             gameOverMessage.innerText = 'You Win! The word was ' + selectedWord;
             gameOverMessage.style.display = 'block';
             hangmanInputArea.style.display = 'none';
+            setTimeout(startHangmanGame, 5000);
         }
     }
 
