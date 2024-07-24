@@ -1,6 +1,10 @@
 const gameArea = document.getElementById('gameArea');
 const wordInput = document.getElementById('wordInput');
 const gameOverMessage = document.getElementById('gameOverMessage');
+const startButton = document.getElementById('startButton');
+const hangmanButton = document.getElementById('hangmanButton');
+const backButton = document.getElementById('backButton');
+const inputArea = document.getElementById('inputArea');
 const words = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew'];
 let fallingWords = [];
 let gameInterval;
@@ -8,6 +12,16 @@ const wordHeight = 30; // 단어의 대략적인 높이
 const wordWidth = 100; // 단어의 대략적인 너비
 
 function startGame() {
+    gameArea.style.display = 'block';
+    inputArea.style.display = 'block';
+    startButton.style.display = 'none';
+    hangmanButton.style.display = 'none';
+    backButton.style.display = 'block';
+    wordInput.disabled = false;
+    wordInput.focus();
+    gameOverMessage.style.display = 'none';
+    fallingWords = [];
+    gameArea.innerHTML = '';
     gameInterval = setInterval(() => {
         createWord();
         moveWords();
@@ -63,6 +77,19 @@ function gameOver() {
     gameOverMessage.style.display = 'block';
 }
 
+function resetGame() {
+    clearInterval(gameInterval);
+    gameArea.style.display = 'none';
+    inputArea.style.display = 'none';
+    hangmanArea.style.display = 'none';
+    hangmanInputArea.style.display = 'none';
+    startButton.style.display = 'block';
+    hangmanButton.style.display = 'block';
+    backButton.style.display = 'none';
+    gameOverMessage.style.display = 'none';
+    wordInput.value = '';
+}
+
 wordInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         const inputWord = wordInput.value.trim();
@@ -75,4 +102,5 @@ wordInput.addEventListener('keydown', (event) => {
     }
 });
 
-startGame();
+startButton.addEventListener('click', startGame);
+backButton.addEventListener('click', resetGame);

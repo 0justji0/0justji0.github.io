@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Game</title>
+    <title>Typing and Hangman Games</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,9 +11,10 @@
             margin: 0;
             overflow: hidden;
         }
-        #gameArea {
+        #gameArea, #hangmanArea {
+            display: none;
             position: relative;
-            height: 80vh; /* 게임 영역의 높이를 줄임 */
+            height: 80vh;
             border: 1px solid #000;
             margin: 20px;
             overflow: auto;
@@ -24,15 +25,16 @@
             font-size: 24px;
             color: red;
         }
-        #inputArea {
+        #inputArea, #hangmanInputArea {
+            display: none;
             position: absolute;
             bottom: 0;
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            height: 10vh; /* 입력 영역의 높이 지정 */
+            height: 10vh;
         }
-        #wordInput {
+        #wordInput, #hangmanInput {
             width: 100%;
             padding: 10px;
             font-size: 18px;
@@ -51,15 +53,34 @@
             box-sizing: border-box;
             z-index: 1000;
         }
+        #startButton, #hangmanButton, #backButton {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin-top: 50px;
+        }
+        #backButton {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Typing Game!</h1>
+    <h1>Typing and Hangman Games!</h1>
+    <button id="startButton">Start Typing Game</button>
+    <button id="hangmanButton">Start Hangman Game</button>
+    <button id="backButton">Back</button>
     <div id="gameArea"></div>
     <div id="inputArea">
         <input type="text" id="wordInput" placeholder="여기에 영어를 입력해서 지워주세요">
     </div>
+    <div id="hangmanArea"></div>
+    <div id="hangmanInputArea">
+        <input type="text" id="hangmanInput" placeholder="여기에 글자를 입력하세요">
+    </div>
     <div id="gameOverMessage">Game Over!</div>
     <script src="game.js"></script>
+    <script src="hangman.js"></script>
 </body>
 </html>
